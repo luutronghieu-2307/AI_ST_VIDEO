@@ -171,3 +171,4 @@ Dự án được xây dựng phục vụ mục đích cá nhân và nghiên c�
 
 - lấy 2 file .mp3 và .srt sau khi đã chạy kịch bản ở bên project HTvideoAI trước lấy 2 file này ở mục ( HTvideoAI/storage/tasks/ ).
 - sau đó thêm lần lượt 2 file vào giao diện tạo video và bấm khởi tạo. sau khi khởi tạo xong video sẽ được tự ghép lại thành 1 video hoàn thiện.
+- **dự án HTvideoAI**: [https://github.com/luutronghieu-2307/HTvideoAI](https://github.com/luutronghieu-2307/HTvideoAI)

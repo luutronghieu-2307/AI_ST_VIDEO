@@ -1,0 +1,26 @@
+<!-- History Gallery Component -->
+<div class="history-section">
+    <div class="history-header">
+        <div class="history-title-row">
+            <h3><i class="fa-solid fa-clock-rotate-left"></i> Lịch sử vừa tạo</h3>
+            <span class="badge badge-subtle hidden" id="historyCountBadge">0 ảnh</span>
+        </div>
+        <div class="history-actions">
+            <button type="button" id="manageHistoryBtn" class="text-btn accent action-sm" title="Mở danh sách quản lý & xóa nhiều ảnh">
+                <i class="fa-solid fa-layer-group"></i> Quản lý
+            </button>
+            <button type="button" id="selectAllHistoryBtn" class="text-btn action-sm" title="Chọn / Bỏ chọn tất cả">
+                <i class="fa-solid fa-check-double"></i> Chọn tất cả
+            </button>
+            <button type="button" id="deleteSelectedHistoryBtn" class="text-btn danger-text action-sm hidden" title="Xóa các ảnh đã chọn">
+                <i class="fa-solid fa-trash-can"></i> Xóa đã chọn (<span id="selectedHistoryCount">0</span>)
+            </button>
+            <button type="button" id="clearHistoryBtn" class="text-btn danger-text action-sm" title="Xóa toàn bộ lịch sử">
+                Xóa tất cả
+            </button>
+        </div>
+    </div>
+    <div class="history-grid" id="historyGrid">
+        <!-- Dynamic History Cards injected by JavaScript -->
+    </div>
+</div>

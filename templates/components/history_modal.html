@@ -1,0 +1,38 @@
+<!-- History Manager Modal Component -->
+<div class="modal hidden" id="historyManagerModal">
+    <div class="modal-backdrop" id="historyModalBackdrop"></div>
+    <div class="modal-content modal-card glass-card">
+        <div class="modal-header">
+            <div class="modal-title">
+                <i class="fa-solid fa-clock-rotate-left accent-icon"></i>
+                <div>
+                    <h3>Quản lý Lịch sử Tạo ảnh</h3>
+                    <span class="modal-subtitle">Tích chọn các ảnh muốn xóa hoặc xem lại</span>
+                </div>
+            </div>
+            <button class="close-modal" id="closeHistoryModalBtn" title="Đóng"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="template-manager-toolbar">
+            <label class="custom-checkbox-label" id="selectAllHistoryModalWrapper">
+                <input type="checkbox" id="selectAllHistoryModalCb">
+                <span class="custom-checkmark"><i class="fa-solid fa-check"></i></span>
+                <span>Chọn tất cả ảnh</span>
+            </label>
+            <div class="toolbar-actions">
+                <button type="button" id="deleteSelectedHistoryModalBtn" class="text-btn danger-text action-sm hidden">
+                    <i class="fa-solid fa-trash-can"></i> Xóa đã chọn (<span id="selectedHistoryModalCount">0</span>)
+                </button>
+            </div>
+        </div>
+
+        <div class="template-list-container" id="historyListModalContainer">
+            <!-- Dynamic History Items injected by JS -->
+        </div>
+
+        <div class="modal-footer">
+            <span class="info-note"><i class="fa-solid fa-database"></i> Lưu trữ tối đa 20 ảnh gần nhất trên trình duyệt</span>
+            <button type="button" class="secondary-btn btn-sm" id="doneHistoryModalBtn">Đóng</button>
+        </div>
+    </div>
+</div>

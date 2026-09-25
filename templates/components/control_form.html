@@ -1,0 +1,101 @@
+<!-- Control Form Component -->
+<section class="control-panel glass-card">
+    <div class="panel-header">
+        <h2><i class="fa-solid fa-sliders"></i> Thiết lập sáng tạo</h2>
+        <span class="subtitle">Mô tả ý tưởng logo hoặc hình ảnh bạn muốn tạo</span>
+    </div>
+
+    <!-- Prompt Template Selector -->
+    <div class="form-group">
+        <div class="label-row">
+            <label for="promptTemplateSelect"><i class="fa-solid fa-list"></i> Chọn Prompt Template</label>
+            <div class="template-actions-row">
+                <button type="button" id="manageTemplatesBtn" class="text-btn accent" title="Mở danh sách quản lý & xóa nhiều template">
+                    <i class="fa-solid fa-layer-group"></i> Quản lý
+                </button>
+                <button type="button" id="deleteTemplateBtn" class="text-btn danger hidden" title="Xóa template này">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+        </div>
+        <select id="promptTemplateSelect" class="custom-select">
+            <option value="">-- Chọn template hoặc nhập prompt bên dưới --</option>
+        </select>
+    </div>
+
+    <!-- Main Prompt Input -->
+    <div class="form-group">
+        <div class="label-row">
+            <label for="promptInput"><i class="fa-solid fa-pen-nib"></i> Prompt tự nhập (Tùy chọn)</label>
+            <button type="button" id="randomPromptBtn" class="text-btn">
+                <i class="fa-solid fa-dice"></i> Chọn template ngẫu nhiên
+            </button>
+        </div>
+        <textarea 
+            id="promptInput" 
+            rows="3" 
+            placeholder="Nhập prompt tùy chỉnh nếu muốn tự viết mô tả (nếu đã chọn template ở trên, bạn có thể để trống ô này)..."
+        ></textarea>
+    </div>
+
+    <!-- Quick Style Presets -->
+    <div class="prompt-presets">
+        <span class="preset-title">Mẫu phong cách nhanh:</span>
+        <div class="preset-chips">
+            <button class="chip" data-prompt="Minimalist geometric logo of a fox, sharp lines, gold and navy blue gradient, clean vector aesthetic, white background">🦊 Fox Logo</button>
+            <button class="chip" data-prompt="Futuristic esports gaming mascot logo of a mecha samurai with katana, neon purple and lime green, bold outlines">⚡ Mecha Samurai</button>
+            <button class="chip" data-prompt="Luxury typography monogram letter 'A' entwined with golden leaves, black matte background, ultra realistic 3D">👑 Luxury Monogram</button>
+            <button class="chip" data-prompt="Modern tech startup icon, glowing 3D glassmorphism sphere with colorful neon ribbons, sleek and clean">🔮 3D Glass Orb</button>
+        </div>
+    </div>
+
+    <!-- Advanced Settings Accordion -->
+    <div class="accordion-item">
+        <button class="accordion-toggle" id="advancedToggle">
+            <span><i class="fa-solid fa-gear"></i> Tùy chỉnh thông số nâng cao</span>
+            <i class="fa-solid fa-chevron-down toggle-icon"></i>
+        </button>
+        <div class="accordion-content" id="advancedContent">
+            <div class="grid-2-col">
+                <div class="form-group">
+                    <label for="aspectRatioSelect"><i class="fa-solid fa-crop-simple"></i> Kích thước</label>
+                    <select id="aspectRatioSelect" class="custom-select">
+                        <option value="512x512" selected>512 x 512 (1:1 Vuông Chuẩn)</option>
+                        <option value="768x768">768 x 768 (1:1 Chất lượng cao)</option>
+                        <option value="512x768">512 x 768 (2:3 Dọc)</option>
+                        <option value="768x512">768 x 512 (3:2 Ngang)</option>
+                        <option value="1024x1024">1024 x 1024 (1:1 Siêu nét)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="numStepsInput">
+                        <i class="fa-solid fa-stairs"></i> Steps (Số bước lấy mẫu)
+                        <span id="stepsVal" class="val-badge">4</span>
+                    </label>
+                    <input type="range" id="numStepsInput" min="1" max="10" value="4" class="custom-range">
+                </div>
+            </div>
+
+            <div class="grid-2-col">
+                <div class="form-group">
+                    <label for="seedInput"><i class="fa-solid fa-seedling"></i> Seed (-1 để ngẫu nhiên)</label>
+                    <input type="number" id="seedInput" value="15" placeholder="-1" class="custom-input">
+                </div>
+                <div class="form-group">
+                    <label for="apiKeyInput"><i class="fa-solid fa-key"></i> Pixazo API Key</label>
+                    <input type="password" id="apiKeyInput" placeholder="Nhập API Key nếu dùng client-side" class="custom-input">
+                    <span class="field-hint"><i class="fa-solid fa-arrow-up-right-from-square"></i> Chưa có API key? <a href="https://api-console.pixazo.ai/api_keys" target="_blank" rel="noopener noreferrer" class="link-inline">Lấy key ở đây</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generate Button -->
+    <button id="generateBtn" class="primary-btn">
+        <span class="btn-content">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> 
+            <span class="btn-text">Khởi tạo Logo AI</span>
+        </span>
+        <div class="btn-glow"></div>
+    </button>
+</section>

@@ -1,0 +1,131 @@
+<!-- Storyboard Input Component -->
+<section class="storyboard-input-panel glass-card">
+    <div class="panel-header">
+        <h2><i class="fa-solid fa-film"></i> Tạo Storyboard Video</h2>
+        <span class="subtitle">Nhập file phụ đề Subtitle (.srt) & đính kèm MP3 lồng tiếng</span>
+    </div>
+
+    <!-- SRT Subtitle Input Section -->
+    <div class="form-group">
+        <div class="label-row">
+            <label><i class="fa-solid fa-closed-captioning"></i> Kịch bản Phụ đề (.srt)</label>
+            <div class="srt-quick-actions">
+                <button type="button" id="pasteSampleSrtBtn" class="format-btn" title="Dán file subtitle.srt mẫu để thử nghiệm">
+                    <i class="fa-solid fa-bolt"></i> Dán mẫu SRT
+                </button>
+            </div>
+        </div>
+        <div class="upload-zone srt-upload-zone" id="srtUploadZone">
+            <input type="file" id="srtFileInput" accept=".srt,text/plain" hidden>
+            <div class="upload-placeholder" id="srtUploadPlaceholder">
+                <div class="upload-icon"><i class="fa-solid fa-file-lines"></i></div>
+                <p>Kéo thả file <strong>.srt</strong> vào đây hoặc <span class="upload-link">chọn file</span></p>
+                <small>Hỗ trợ chuẩn: SubRip (.srt) với timecode</small>
+            </div>
+            <div class="upload-preview hidden" id="srtUploadPreview">
+                <div class="audio-file-info">
+                    <i class="fa-solid fa-file-circle-check"></i>
+                    <div>
+                        <span id="srtFileName">subtitle.srt</span>
+                        <small id="srtFileStatus">Đã nạp</small>
+                    </div>
+                </div>
+                <button type="button" id="removeSrtBtn" class="remove-img-btn" title="Gỡ file SRT">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+        <textarea
+            id="storyboardTextInput"
+            rows="6"
+            class="mt-8"
+            placeholder="Hoặc dán trực tiếp nội dung SRT vào đây...&#10;&#10;1&#10;00:00:00,100 --> 00:00:04,292&#10;Trí tuệ nhân tạo không phải là một thực thể độc lập..."
+        ></textarea>
+    </div>
+
+    <!-- Audio Voiceover MP3 Section (Optional) -->
+    <div class="form-group">
+        <label><i class="fa-solid fa-microphone-lines"></i> File Âm thanh MP3 <span class="badge-optional">(Tùy chọn - Lồng tiếng vào video hoàn thiện)</span></label>
+        <div class="upload-zone" id="audioUploadZone">
+            <input type="file" id="audioFileInput" accept="audio/mpeg,audio/mp3" hidden>
+            <div class="upload-placeholder" id="audioUploadPlaceholder">
+                <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                <p>Kéo thả file MP3 lồng tiếng vào đây hoặc <span class="upload-link">chọn file</span></p>
+                <small>Hỗ trợ: MP3 (Tối đa 50MB) – Tự động muxing vào video cuối cùng</small>
+            </div>
+            <div class="upload-preview hidden" id="audioUploadPreview">
+                <div class="audio-file-info">
+                    <i class="fa-solid fa-file-audio"></i>
+                    <div>
+                        <span id="audioFileName">voice.mp3</span>
+                        <small id="audioDuration">Đã chọn</small>
+                    </div>
+                </div>
+                <button type="button" id="removeAudioBtn" class="remove-img-btn" title="Xóa file">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Row 1 -->
+    <div class="grid-2-col mt-12">
+        <div class="form-group">
+            <label for="storyboardTitleInput"><i class="fa-solid fa-heading"></i> Tiêu đề Storyboard</label>
+            <input type="text" id="storyboardTitleInput" placeholder="VD: Khám phá Trí tuệ Nhân tạo" class="custom-input" maxlength="100">
+        </div>
+        <div class="form-group">
+            <label for="storyboardGroqKeyInput"><i class="fa-solid fa-key"></i> Groq API Key</label>
+            <input type="password" id="storyboardGroqKeyInput" placeholder="gsk_..." class="custom-input">
+            <span class="field-hint">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                Chưa có key? <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer" class="link-inline">Lấy key ở đây</a>
+            </span>
+        </div>
+    </div>
+
+    <!-- Settings Row 2 -->
+    <div class="grid-2-col mt-12">
+        <div class="form-group">
+            <label for="storyboardModelSelect"><i class="fa-solid fa-microchip"></i> Model sinh Prompt</label>
+            <select id="storyboardModelSelect" class="custom-select">
+                <option value="openai/gpt-oss-120b" selected>openai/gpt-oss-120b (GPT-120B)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="storyboardAspectSelect"><i class="fa-solid fa-crop-simple"></i> Tỷ lệ khung</label>
+            <select id="storyboardAspectSelect" class="custom-select">
+                <option value="16:9" selected>16:9 (Ngang - Documentary)</option>
+                <option value="9:16">9:16 (Dọc - TikTok/Reels)</option>
+                <option value="1:1">1:1 (Vuông)</option>
+                <option value="21:9">21:9 (Cinematic)</option>
+                <option value="4:3">4:3 (Cổ điển)</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Info Card -->
+    <div class="storyboard-info-card mt-12">
+        <div class="info-row">
+            <span><i class="fa-solid fa-layer-group"></i> Số phân đoạn SRT:</span>
+            <strong id="infoSegmentCount">--</strong>
+        </div>
+        <div class="info-row">
+            <span><i class="fa-solid fa-clock"></i> Tổng thời lượng video:</span>
+            <strong id="infoAudioDuration">--</strong>
+        </div>
+        <div class="info-row">
+            <span><i class="fa-solid fa-music"></i> Âm thanh lồng tiếng:</span>
+            <strong id="infoAudioStatus">Không đính kèm</strong>
+        </div>
+    </div>
+
+    <!-- Create Button -->
+    <button id="createStoryboardBtn" class="primary-btn mt-12">
+        <span class="btn-content">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span class="btn-text">Tạo & Ghép Video Storyboard</span>
+        </span>
+        <div class="btn-glow"></div>
+    </button>
+</section>

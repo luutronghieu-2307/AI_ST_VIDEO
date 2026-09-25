@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}AURA - AI Logo & Visual Generator (Flux.1 Schnell){% endblock %}
+
+{% block content %}
+    <!-- Header & Navbar Menu -->
+    {% include "components/header.html" %}
+
+    <!-- View 1: Studio Tạo Ảnh & Logo -->
+    <main class="main-content view-section active" id="viewGenerate">
+        <!-- Control Form Panel (Gọn gàng) -->
+        {% include "components/control_form.html" %}
+
+        <!-- Preview & Gallery Panel -->
+        {% include "components/preview_panel.html" %}
+    </main>
+
+    <!-- View 2: Studio Phân tích & Tạo Template (Chức năng riêng biệt) -->
+    <main class="main-content view-section hidden" id="viewTemplate">
+        {% include "components/ai_prompt_builder.html" %}
+    </main>
+
+    <!-- View 3: Storyboard Video Studio -->
+    <main class="main-content view-section hidden" id="viewStoryboard">
+        {% include "components/storyboard_input.html" %}
+        {% include "components/storyboard_timeline.html" %}
+    </main>
+
+    <!-- Footer -->
+    {% include "components/footer.html" %}
+{% endblock %}
+
+{% block modals %}
+    {% include "components/modal.html" %}
+    {% include "components/template_modal.html" %}
+    {% include "components/history_modal.html" %}
+    {% include "components/storyboard_modal.html" %}
+{% endblock %}

@@ -1,0 +1,70 @@
+<!-- Storyboard Timeline Component -->
+<section class="storyboard-timeline-panel glass-card">
+    <div class="panel-header flex-between">
+        <div>
+            <h2><i class="fa-solid fa-timeline"></i> Timeline Storyboard</h2>
+            <span class="subtitle" id="storyboardTitle">Chưa có storyboard nào</span>
+        </div>
+        <div class="status-indicator" id="storyboardStatusBadge">
+            <span class="status-dot"></span>
+            <span id="storyboardStatusText">Sẵn sàng</span>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="storyboard-progress-wrapper">
+        <div class="storyboard-progress-bar">
+            <div class="storyboard-progress-fill" id="storyboardProgressBar" style="width: 0%"></div>
+        </div>
+        <span class="storyboard-progress-text" id="storyboardProgressText">0/0</span>
+    </div>
+
+    <!-- Full Merged Video Player Area -->
+    <div class="full-video-section hidden" id="fullMergedVideoSection">
+        <div class="full-video-card">
+            <div class="full-video-header flex-between">
+                <div class="full-video-title">
+                    <i class="fa-solid fa-clapperboard text-glow"></i>
+                    <span>Video Hoàn Chỉnh (Đã Ghép Nối & Lồng Tiếng)</span>
+                </div>
+                <div class="full-video-actions">
+                    <button type="button" id="reStitchBtn" class="btn-icon-subtle" title="Ghép nối lại video">
+                        <i class="fa-solid fa-arrows-rotate"></i> Ghép lại
+                    </button>
+                    <a id="downloadFullVideoBtn" class="download-full-btn" target="_blank" download="storyboard_full.mp4">
+                        <i class="fa-solid fa-download"></i> Tải Toàn Bộ Video
+                    </a>
+                </div>
+            </div>
+            
+            <div class="full-video-container" id="fullVideoPlayerContainer">
+                <video id="fullMergedVideoPlayer" controls playsinline preload="metadata" class="full-video-element">
+                    <source src="" type="video/mp4">
+                    Trình duyệt của bạn không hỗ trợ thẻ video.
+                </video>
+            </div>
+
+            <div class="stitching-loader hidden" id="stitchingLoader">
+                <div class="spinner-pulse"></div>
+                <p><i class="fa-solid fa-scissors"></i> Đang tự động ghép nối các phân cảnh và lồng tiếng MP3...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Subtitle Segment Grid (3 cột) -->
+    <div class="storyboard-segment-grid" id="storyboardSegmentGrid">
+        <!-- Dynamic segment cards injected by JS -->
+    </div>
+
+    <!-- Empty State -->
+    <div class="storyboard-empty-state" id="storyboardEmptyState">
+        <div class="placeholder-icon">
+            <i class="fa-solid fa-film"></i>
+        </div>
+        <h3>Chưa có storyboard nào</h3>
+        <p>Tải lên file phụ đề <strong>.srt</strong> (kèm MP3 nếu muốn) và bấm <strong>"Tạo & Ghép Video Storyboard"</strong> để bắt đầu.</p>
+    </div>
+</section>
+
+<!-- Toast Notification Container -->
+<div id="toastContainer" class="toast-container"></div>

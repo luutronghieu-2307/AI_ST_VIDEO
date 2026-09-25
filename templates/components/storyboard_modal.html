@@ -1,0 +1,65 @@
+<!-- Storyboard Video Fullscreen Modal -->
+<div class="modal hidden" id="storyboardVideoModal">
+    <div class="modal-backdrop" id="storyboardVideoBackdrop"></div>
+    <div class="modal-content">
+        <button class="close-modal" id="closeStoryboardVideoBtn" title="Đóng">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <video id="storyboardFullscreenVideo" controls preload="metadata">
+            <source src="" type="video/mp4">
+        </video>
+    </div>
+</div>
+
+<!-- Storyboard Prompt Edit Modal -->
+<div class="modal hidden" id="storyboardPromptModal">
+    <div class="modal-backdrop" id="storyboardPromptBackdrop"></div>
+    <div class="modal-content modal-card glass-card">
+        <div class="modal-header">
+            <div class="modal-title">
+                <i class="fa-solid fa-pen-to-square accent-icon"></i>
+                <div>
+                    <h3>Chỉnh sửa Prompt</h3>
+                    <span class="modal-subtitle">Sửa prompt video cho segment này</span>
+                </div>
+            </div>
+            <button class="close-modal" id="closeStoryboardPromptBtn" title="Đóng">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+                <label><i class="fa-solid fa-quote-left"></i> Nội dung thoại</label>
+                <textarea id="editSegmentText" rows="3" class="custom-input" readonly></textarea>
+            </div>
+
+            <div class="form-group mt-12">
+                <label for="editVideoPrompt"><i class="fa-solid fa-wand-magic-sparkles"></i> Video Prompt</label>
+                <textarea
+                    id="editVideoPrompt"
+                    rows="8"
+                    class="custom-input"
+                    placeholder="Nhập prompt video chi tiết (tiếng Anh)..."
+                ></textarea>
+                <span class="field-hint">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Prompt nên mô tả: subject, action, camera, atmosphere, lighting
+                </span>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <span class="info-note">
+                <i class="fa-solid fa-lightbulb"></i>
+                Prompt sẽ được dùng để tạo lại video
+            </span>
+            <div class="modal-actions">
+                <button type="button" class="secondary-btn btn-sm" id="cancelEditPromptBtn">Hủy</button>
+                <button type="button" class="primary-btn btn-sm" id="saveEditPromptBtn">
+                    <i class="fa-solid fa-rotate"></i> Tạo lại Video
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

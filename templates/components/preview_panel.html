@@ -1,0 +1,52 @@
+<!-- Preview & History Panel Component -->
+<section class="preview-panel glass-card">
+    <div class="panel-header flex-between">
+        <div>
+            <h2><i class="fa-solid fa-image"></i> Kết quả tạo ảnh</h2>
+            <span class="subtitle">Chi tiết tác phẩm nghệ thuật của bạn</span>
+        </div>
+        <div class="status-indicator" id="statusIndicator">
+            <span class="status-dot"></span> <span id="statusText">Sẵn sàng</span>
+        </div>
+    </div>
+
+    <!-- Output Display Container -->
+    <div class="display-container" id="displayContainer">
+        <!-- Placeholder State -->
+        <div class="placeholder-state" id="placeholderState">
+            <div class="placeholder-icon">
+                <i class="fa-solid fa-palette"></i>
+            </div>
+            <h3>Chưa có ảnh nào được tạo</h3>
+            <p>Nhập prompt và bấm <strong>"Khởi tạo Logo AI"</strong> để xem điều kỳ diệu.</p>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading-state hidden" id="loadingState">
+            <div class="scanner-spinner">
+                <div class="inner-circle"></div>
+            </div>
+            <h3 class="loading-title">Đang tổng hợp hình ảnh...</h3>
+            <p class="loading-subtitle">Flux.1 Schnell AI đang vẽ logo theo mô tả của bạn</p>
+        </div>
+
+        <!-- Image Result State -->
+        <div class="image-wrapper hidden" id="imageWrapper">
+            <img id="resultImage" src="" alt="AI Generated Logo">
+            <div class="image-overlay-actions">
+                <button id="downloadBtn" class="action-btn" title="Tải ảnh về máy">
+                    <i class="fa-solid fa-download"></i> Tải về
+                </button>
+                <button id="copyUrlBtn" class="action-btn" title="Sao chép link ảnh">
+                    <i class="fa-solid fa-link"></i> Copy Link
+                </button>
+                <button id="fullscreenBtn" class="action-btn" title="Xem toàn màn hình">
+                    <i class="fa-solid fa-expand"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sub-component History -->
+    {% include "components/history.html" %}
+</section>

@@ -1,0 +1,104 @@
+<!-- AI Prompt Builder Component (Template Studio View) -->
+<div class="ai-builder-wrapper">
+    <div class="ai-builder-section glass-card">
+        <div class="panel-header">
+            <h2><i class="fa-solid fa-robot"></i> Studio Phân tích & Tạo Template</h2>
+            <span class="subtitle">Upload ảnh mẫu – Groq AI sẽ phân tích và tạo template tự động</span>
+        </div>
+
+        <!-- Upload Zone -->
+        <div class="upload-zone" id="uploadZone">
+            <input type="file" id="imageFileInput" accept="image/jpeg,image/png,image/webp" hidden>
+            <div class="upload-placeholder" id="uploadPlaceholder">
+                <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                <p>Kéo thả ảnh vào đây hoặc <span class="upload-link">chọn file</span></p>
+                <small>Hỗ trợ: JPG, PNG, WEBP – Tối đa 5MB</small>
+            </div>
+            <div class="upload-preview hidden" id="uploadPreview">
+                <img id="previewImg" src="" alt="Ảnh mẫu">
+                <button type="button" id="removeImageBtn" class="remove-img-btn" title="Xóa ảnh">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Groq Settings Row -->
+        <div class="grid-2-col mt-12">
+            <div class="form-group">
+                <label for="promptNameInput"><i class="fa-solid fa-tag"></i> Tên Prompt Template</label>
+                <input type="text" id="promptNameInput" placeholder="VD: Logo Minimalist Tech" class="custom-input" maxlength="80">
+            </div>
+            <div class="form-group">
+                <label for="groqApiKeyInput"><i class="fa-solid fa-key"></i> Groq API Key</label>
+                <input type="password" id="groqApiKeyInput" placeholder="gsk_..." class="custom-input">
+                <span class="field-hint"><i class="fa-solid fa-arrow-up-right-from-square"></i> Chưa có API key? <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer" class="link-inline">Lấy key ở đây</a></span>
+            </div>
+        </div>
+
+        <!-- Groq Vision Model Selector -->
+        <div class="form-group mt-8">
+            <div class="flex-between">
+                <label for="groqModelSelect"><i class="fa-solid fa-microchip"></i> Groq Vision Model</label>
+                <span class="badge badge-subtle" id="modelCountBadge" title="Hệ thống tự động lọc chỉ các model có khả năng đọc ảnh"><i class="fa-solid fa-eye"></i> Đọc ảnh (Vision)</span>
+            </div>
+            <select id="groqModelSelect" class="custom-input">
+                <option value="meta-llama/llama-4-scout-17b-16e-instruct">meta-llama/llama-4-scout-17b-16e-instruct (Mặc định)</option>
+            </select>
+        </div>
+
+        <!-- Prompt Generation Mode Selection (2 Nút chọn Cơ bản & Nâng cao) -->
+        <div class="form-group mt-12">
+            <div class="flex-between">
+                <label><i class="fa-solid fa-sliders"></i> Chế độ sinh Prompt</label>
+                <span class="badge badge-accent" id="modeLimitBadge"><i class="fa-solid fa-gauge-high"></i> 20 req/phút</span>
+            </div>
+            <div class="prompt-mode-grid">
+                <div class="mode-card active" id="modeStandardCard" role="button" tabindex="0">
+                    <input type="radio" name="promptMode" value="standard" checked hidden>
+                    <div class="mode-header">
+                        <div class="mode-title-group">
+                            <i class="fa-solid fa-image mode-icon"></i>
+                            <span class="mode-title">Cơ bản (Gốc)</span>
+                        </div>
+                        <div class="mode-radio-dot"></div>
+                    </div>
+                    <p class="mode-desc">Phân tích bám sát thiết kế, phong cách & màu sắc ảnh gốc</p>
+                </div>
+
+                <div class="mode-card" id="modeAdvancedCard" role="button" tabindex="0">
+                    <input type="radio" name="promptMode" value="advanced" hidden>
+                    <div class="mode-header">
+                        <div class="mode-title-group">
+                            <i class="fa-solid fa-wand-magic-sparkles mode-icon accent"></i>
+                            <span class="mode-title">Nâng cao <span class="badge-tag">GPT-120B</span></span>
+                        </div>
+                        <div class="mode-radio-dot"></div>
+                    </div>
+                    <p class="mode-desc">Tự động qua GPT-120B nâng cấp biến tấu sáng tạo, không trùng lặp</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Suggest Button -->
+        <button id="suggestPromptBtn" class="secondary-btn mt-12" disabled>
+            <span class="btn-content">
+                <i class="fa-solid fa-wand-sparkles"></i>
+                <span id="suggestBtnText">Phân tích và tạo template</span>
+            </span>
+        </button>
+
+        <!-- Success Notification -->
+        <div class="template-saved-card hidden" id="templateSavedCard">
+            <div class="template-saved-header">
+                <i class="fa-solid fa-circle-check accent-green"></i>
+                <div class="template-saved-info">
+                    <span class="template-saved-title">Tạo template thành công!</span>
+                    <span class="template-saved-sub" id="templateSavedSub">Template đã được lưu vào danh sách.</span>
+                </div>
+            </div>
+            <button type="button" class="primary-btn btn-sm mt-12" id="goToGenerateViewBtn">
+                <i class="fa-solid fa-paintbrush"></i> Đến trang Tạo ảnh ngay
+            </button>
+        </div>
+    </div>
+</div>

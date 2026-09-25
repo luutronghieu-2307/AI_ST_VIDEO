@@ -1,0 +1,82 @@
+# ==========================================
+# 🔑 Secret, API Keys & Licenses (Bảo mật)
+# ==========================================
+.env
+.env.local
+.env.*.local
+key.txt
+license.key
+*.key
+*.pem
+nnn
+services/_embedded_token.py
+
+# ==========================================
+# 🤖 AI Agent, Reports & Internal Plans
+# ==========================================
+AGENTS.md
+REPORT_STORYBOARD.md
+DOCS_INDEX.md
+plans/
+.agents/
+.gemini/
+
+# ==========================================
+# 🐍 Python & Virtual Environment
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+ENV/
+env/
+.Python
+
+# ==========================================
+# 🧪 Testing & Code Coverage
+# ==========================================
+.pytest_cache/
+.coverage
+.coveragerc
+htmlcov/
+coverage-js/
+coverage.xml
+*.cover
+
+# ==========================================
+# 📦 Node / NPM
+# ==========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ==========================================
+# 🚀 Build & PyInstaller Executables
+# ==========================================
+build/
+dist/
+*.egg-info/
+*.zip
+build_exe.zip
+
+# ==========================================
+# 📂 Runtime Data & Generated Media
+# ==========================================
+data/
+temp_audio/
+*.mp4
+*.mp3
+subtitle.srt
+
+# ==========================================
+# 💻 OS & IDE Files
+# ==========================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo

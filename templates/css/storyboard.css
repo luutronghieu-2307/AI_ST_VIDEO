@@ -1,0 +1,420 @@
+/* ==========================================================================
+   storyboard.css – Styles cho tính năng Storyboard Video (SRT & Audio Muxing)
+   ========================================================================== */
+
+/* ─── Input Panel ─────────────────────────────────────────────────────── */
+.storyboard-input-panel {
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.srt-quick-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.badge-optional {
+    font-size: 11px;
+    font-weight: 500;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.12);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.srt-upload-zone {
+    border-style: dashed;
+    margin-bottom: 8px;
+}
+
+.format-btn {
+    padding: 6px 14px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    background: rgba(56, 189, 248, 0.1);
+    color: #38bdf8;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.format-btn:hover {
+    background: rgba(56, 189, 248, 0.25);
+    transform: translateY(-1px);
+}
+
+/* ─── Upload Zone ─────────────────────────────────────────────────────── */
+.audio-file-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(56, 189, 248, 0.1);
+    border-radius: 8px;
+    width: 100%;
+}
+
+.audio-file-info i {
+    font-size: 24px;
+    color: #38bdf8;
+}
+
+.audio-file-info span {
+    display: block;
+    font-weight: 500;
+    color: #e2e8f0;
+}
+
+.audio-file-info small {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+/* ─── Info Card ───────────────────────────────────────────────────────── */
+.storyboard-info-card {
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 14px;
+    color: #94a3b8;
+}
+
+.info-row strong {
+    color: #38bdf8;
+    font-weight: 600;
+}
+
+/* ─── Timeline Panel ──────────────────────────────────────────────────── */
+.storyboard-timeline-panel {
+    padding: 24px;
+}
+
+.storyboard-progress-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 16px 0 20px;
+}
+
+.storyboard-progress-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.storyboard-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+}
+
+.storyboard-progress-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: #38bdf8;
+    min-width: 50px;
+    text-align: right;
+}
+
+/* ─── Full Merged Video Section ───────────────────────────────────────── */
+.full-video-section {
+    margin-bottom: 24px;
+}
+
+.full-video-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.full-video-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.full-video-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f1f5f9;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.text-glow {
+    color: #38bdf8;
+    filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.6));
+}
+
+.full-video-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.download-full-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #0284c7, #6366f1);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+}
+
+.download-full-btn:hover {
+    filter: brightness(1.15);
+    transform: translateY(-1px);
+}
+
+.btn-icon-subtle {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #cbd5e1;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.btn-icon-subtle:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+.full-video-container {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 16 / 9;
+}
+
+.full-video-element {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.stitching-loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    gap: 12px;
+    color: #38bdf8;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.spinner-pulse {
+    width: 36px;
+    height: 36px;
+    border: 3px solid rgba(56, 189, 248, 0.2);
+    border-top-color: #38bdf8;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ─── Segment Grid ────────────────────────────────────────────────────── */
+.storyboard-segment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.storyboard-segment-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px;
+    transition: all 0.2s;
+}
+
+.storyboard-segment-card:hover {
+    border-color: rgba(56, 189, 248, 0.3);
+    transform: translateY(-2px);
+}
+
+.segment-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.segment-order {
+    font-size: 14px;
+    font-weight: 700;
+    color: #38bdf8;
+}
+
+.segment-timecode-badge {
+    font-size: 11px;
+    font-family: monospace;
+    color: #94a3b8;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 6px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+/* ─── Status Badge ────────────────────────────────────────────────────── */
+.segment-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.status-pending { background: rgba(148, 163, 184, 0.15); color: #94a3b8; }
+.status-processing { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+.status-completed { background: rgba(74, 222, 128, 0.15); color: #4ade80; }
+.status-failed { background: rgba(248, 113, 113, 0.15); color: #f87171; }
+
+/* ─── Video Player ────────────────────────────────────────────────────── */
+.segment-video-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.segment-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.segment-video-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #334155;
+    font-size: 32px;
+}
+
+.segment-text {
+    font-size: 13px;
+    color: #cbd5e1;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.segment-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 11px;
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+.segment-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* ─── Toast ───────────────────────────────────────────────────────────── */
+.toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 360px;
+}
+
+.toast {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: rgba(17, 24, 39, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(12px);
+    animation: toastSlideIn 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes toastSlideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.toast i { font-size: 18px; margin-top: 2px; }
+.toast-success i { color: #4ade80; }
+.toast-error i { color: #f87171; }
+.toast-warning i { color: #fbbf24; }
+.toast-info i { color: #38bdf8; }
+
+.toast-content { flex: 1; font-size: 13px; color: #e2e8f0; line-height: 1.4; }
+.toast-close { background: none; border: none; color: #64748b; cursor: pointer; padding: 0; font-size: 14px; }
+.toast-close:hover { color: #e2e8f0; }
+
+/* ─── Empty State ─────────────────────────────────────────────────────── */
+.storyboard-empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #64748b;
+}
+
+.storyboard-empty-state .placeholder-icon {
+    font-size: 48px;
+    color: #334155;
+    margin-bottom: 16px;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .storyboard-segment-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+    .storyboard-segment-grid { grid-template-columns: 1fr; }
+    .full-video-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+}

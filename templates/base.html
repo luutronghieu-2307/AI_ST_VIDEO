@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AURA - AI Logo & Visual Creator{% endblock %}</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/icon/LOGO_HAURA.png">
+    
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="/css/style.css?v=2.7">
+    <link rel="stylesheet" href="/css/storyboard.css?v=1.0">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- Background Ambient Glow -->
+    <div class="background-glow">
+        <div class="glow-sphere sphere-1"></div>
+        <div class="glow-sphere sphere-2"></div>
+        <div class="glow-sphere sphere-3"></div>
+    </div>
+
+    <!-- Rate Limit Banner -->
+    <div class="rate-limit-banner hidden" id="rateLimitBanner">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>⏳ Bạn đã dùng hết <strong>20 lượt/phút</strong> – Vui lòng chờ</span>
+        <span class="rate-limit-countdown"><span id="rateLimitTimer">60</span>s</span>
+        <span>để tiếp tục</span>
+    </div>
+
+    <div class="app-container">
+        {% block content %}{% endblock %}
+    </div>
+
+    {% block modals %}{% endblock %}
+
+    <!-- Scripts – thứ tự quan trọng: rate_limit_ui trước, prompt_builder sau -->
+    <script src="/js/rate_limit_ui.js?v=2.6"></script>
+    <script src="/js/history_manager.js?v=2.6"></script>
+    <script src="/js/template_manager.js?v=2.6"></script>
+    <script src="/js/app.js?v=2.6"></script>
+    <script src="/js/prompt_builder.js?v=2.6"></script>
+    <script src="/js/storyboard_manager.js?v=1.0"></script>
+    <script src="/js/storyboard_history.js?v=1.0"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

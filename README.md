@@ -166,3 +166,8 @@ python main.py
 
 ## 📄 Giấy phép & Bản quyền
 Dự án được xây dựng phục vụ mục đích cá nhân và nghiên cứu công nghệ Generative AI.
+
+## Lưu ý để sử dụng được tính năng tạo video AI cần những thứ sau.
+
+- lấy 2 file .mp3 và .srt sau khi đã chạy kịch bản ở bên project HTvideoAI trước lấy 2 file này ở mục ( HTvideoAI/storage/tasks/ ).
+- sau đó thêm lần lượt 2 file vào giao diện tạo video và bấm khởi tạo. sau khi khởi tạo xong video sẽ được tự ghép lại thành 1 video hoàn thiện.

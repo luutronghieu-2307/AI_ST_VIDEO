@@ -1,0 +1,88 @@
+/* storyboard_input.css – Input Panel & Upload Zones cho Storyboard */
+.storyboard-input-panel {
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.srt-quick-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.badge-optional {
+    font-size: 11px;
+    font-weight: 500;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.12);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.srt-upload-zone {
+    border-style: dashed;
+    margin-bottom: 8px;
+}
+
+.format-btn {
+    padding: 6px 14px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    background: rgba(56, 189, 248, 0.1);
+    color: #38bdf8;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.format-btn:hover {
+    background: rgba(56, 189, 248, 0.25);
+    transform: translateY(-1px);
+}
+
+.audio-file-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(56, 189, 248, 0.1);
+    border-radius: 8px;
+    width: 100%;
+}
+
+.audio-file-info i {
+    font-size: 24px;
+    color: #38bdf8;
+}
+
+.audio-file-info span {
+    display: block;
+    font-weight: 500;
+    color: #e2e8f0;
+}
+
+.audio-file-info small {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.storyboard-info-card {
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 14px;
+    color: #94a3b8;
+}
+
+.info-row strong {
+    color: #38bdf8;
+    font-weight: 600;
+}

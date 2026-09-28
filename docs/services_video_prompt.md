@@ -15,7 +15,7 @@ Gọi GPT-120B sinh prompt video cho LTX 2.5 từ segment text.
 ## Hằng số
 | Hằng | Giá trị |
 |---|---|
-| `SYSTEM_PROMPT_VIDEO` | Prompt hệ thống (documentary style) |
+| `SYSTEM_PROMPT_VIDEO` | Prime directive: bám sát LITERAL nội dung thoại (RULE#1), ánh xạ khái niệm trừu tượng → cảnh thực (RULE#2), cinematography (RULE#3). BAN robots/holograms trừ khi thoại đề cập rõ. |
 | `DEFAULT_NEGATIVE_PROMPT` | `blurry, low quality, distorted...` |
 
 ## Keywords

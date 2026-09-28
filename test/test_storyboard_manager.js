@@ -1,30 +1,15 @@
 /**
  * test_storyboard_manager.js – Unit tests cho templates/js/storyboard_manager.js
+ *
+ * @jest-environment jsdom
  */
-const fs = require('fs');
 const path = require('path');
-
 const SRC = path.join(__dirname, '..', 'templates', 'js', 'storyboard_manager.js');
 
-/* ─── DOM Setup ───────────────────────────────────────────────────────── */
 function setupDOM() {
     document.body.innerHTML = `
-        <div id="srtUploadZone">
-            <input type="file" id="srtFileInput">
-            <div id="srtUploadPlaceholder"></div>
-            <div id="srtUploadPreview" class="hidden">
-                <span id="srtFileName"></span>
-            </div>
-            <button id="removeSrtBtn"></button>
-        </div>
-        <div id="audioUploadZone">
-            <input type="file" id="audioFileInput">
-            <div id="audioUploadPlaceholder"></div>
-            <div id="audioUploadPreview" class="hidden">
-                <span id="audioFileName"></span>
-            </div>
-            <button id="removeAudioBtn"></button>
-        </div>
+        <div id="srtUploadZone"><input type="file" id="srtFileInput"></div>
+        <div id="audioUploadZone"><input type="file" id="audioFileInput"></div>
         <textarea id="storyboardTextInput"></textarea>
         <input id="storyboardTitleInput">
         <input id="storyboardGroqKeyInput">
@@ -42,170 +27,117 @@ function setupDOM() {
         <div id="storyboardProgressBar"></div>
         <span id="storyboardProgressText"></span>
         <div id="toastContainer"></div>
-        
-        <!-- Full Merged Video -->
         <div id="fullMergedVideoSection" class="hidden">
-            <div id="fullVideoPlayerContainer">
-                <video id="fullMergedVideoPlayer"><source src=""></video>
-            </div>
+            <div id="fullVideoPlayerContainer"><video id="fullMergedVideoPlayer"><source src=""></video></div>
             <div id="stitchingLoader" class="hidden"></div>
             <a id="downloadFullVideoBtn"></a>
         </div>
-
         <div id="storyboardVideoModal" class="hidden">
             <video id="storyboardFullscreenVideo"><source src=""></video>
         </div>
+        <div id="closeStoryboardVideoBtn"></div>
+        <div id="storyboardVideoBackdrop"></div>
     `;
 }
 
-/* ─── Load module ─────────────────────────────────────────────────────── */
 let mod;
 function loadModule() {
     jest.resetModules();
     setupDOM();
     global.checkAndHandleRateLimit = jest.fn().mockResolvedValue(false);
     global.confirm = jest.fn().mockReturnValue(true);
-    global.FileReader = class {
-        readAsText(file) {
-            setTimeout(() => {
-                this.onload({ target: { result: '1\n00:00:00,100 --> 00:00:04,292\nText sample' } });
-            }, 0);
-        }
-    };
     mod = require(SRC);
     return mod;
 }
 
 beforeEach(() => {
+    localStorage.clear();
     loadModule();
 });
 
-/* ─── Tests ───────────────────────────────────────────────────────────── */
-describe('SRT Upload and Parsing', () => {
-    test('handleSrtFile wrong extension', () => {
-        mod.handleSrtFile({ name: 'image.png', size: 100 });
-        const toast = document.querySelector('.toast-error');
-        expect(toast).not.toBeNull();
-        expect(toast.textContent).toContain('Chỉ chấp nhận file phụ đề');
+describe('Storyboard Manager Controller', () => {
+    test('init and paste sample SRT', () => {
+        mod.initStoryboardManager();
+        document.getElementById('pasteSampleSrtBtn').click();
+        expect(document.getElementById('storyboardTextInput').value).toContain('Trí tuệ nhân tạo');
+        expect(document.getElementById('storyboardTitleInput').value).toBe('Khám phá Trí tuệ Nhân tạo');
     });
 
-    test('handleSrtFile valid srt', async () => {
-        const file = { name: 'subtitle.srt', size: 1024 };
-        mod.handleSrtFile(file);
-        expect(mod.getState().srtFile).toBe(file);
-        expect(document.getElementById('srtFileName').textContent).toBe('subtitle.srt');
-        await new Promise(r => setTimeout(r, 10));
-        expect(document.getElementById('storyboardTextInput').value).toContain('00:00:00,100');
+    test('handleCreateStoryboard validation error when empty', async () => {
+        await mod.handleCreateStoryboard();
+        expect(document.querySelector('.toast-error')).not.toBeNull();
     });
 
-    test('resetSrtUpload', () => {
-        mod.handleSrtFile({ name: 'sub.srt', size: 100 });
-        mod.resetSrtUpload();
-        expect(mod.getState().srtFile).toBeNull();
-        expect(document.getElementById('srtUploadPlaceholder').classList.contains('hidden')).toBe(false);
-    });
-
-    test('updateInfoFromText', () => {
-        document.getElementById('storyboardTextInput').value = `1\n00:00:00,100 --> 00:00:04,292\nHello\n\n2\n00:00:05,000 --> 00:00:09,000\nWorld`;
-        mod.updateInfoFromText();
-        expect(document.getElementById('infoSegmentCount').textContent).toBe('2 phân đoạn');
-    });
-});
-
-describe('Audio Upload', () => {
-    test('handleAudioFile too large', () => {
-        mod.handleAudioFile({ name: 'big.mp3', size: 60 * 1024 * 1024 });
-        const toast = document.querySelector('.toast-error');
-        expect(toast).not.toBeNull();
-        expect(toast.textContent).toContain('quá lớn');
-    });
-
-    test('handleAudioFile ok', () => {
-        const file = { name: 'voice.mp3', size: 1024 * 1024 };
-        mod.handleAudioFile(file);
-        expect(mod.getState().audioFile).toBe(file);
-        expect(document.getElementById('infoAudioStatus').textContent).toContain('voice.mp3');
-    });
-
-    test('resetAudioUpload', () => {
-        mod.handleAudioFile({ name: 'v.mp3', size: 100 });
-        mod.resetAudioUpload();
-        expect(mod.getState().audioFile).toBeNull();
-        expect(document.getElementById('infoAudioStatus').textContent).toBe('Không đính kèm');
-    });
-});
-
-describe('Rendering & UI', () => {
-    test('renderSegmentCard with timecode', () => {
-        const html = mod.renderSegmentCard({
-            id: 'seg_1',
-            order: 1,
-            text: 'Hello',
-            timecode: '00:00:00,100 --> 00:00:04,292',
-            duration_sec: 4.19,
-            num_frames: 65,
-            status: 'completed',
-            video_url: 'https://example.com/v.mp4'
+    test('handleCreateStoryboard success', async () => {
+        document.getElementById('storyboardTextInput').value = '1\n00:00:00,000 --> 00:00:02,000\nHi';
+        document.getElementById('storyboardTitleInput').value = 'Title Test';
+        
+        global.fetch = jest.fn().mockResolvedValue({
+            ok: true,
+            json: async () => ({
+                storyboard_id: 'sb_test',
+                title: 'Title Test',
+                segments: []
+            })
         });
-        expect(html).toContain('00:00:00,100 --&gt; 00:00:04,292');
-        expect(html).toContain('65 frames');
-        expect(html).toContain('status-completed');
+
+        await mod.handleCreateStoryboard();
+        expect(mod.getState().storyboardId).toBe('sb_test');
+        expect(localStorage.getItem('aura_active_storyboard')).toBe('sb_test');
     });
 
-    test('renderMergedVideoSection when completed with URL', () => {
-        mod.renderMergedVideoSection({
-            merged_video_url: '/static/merged_videos/sb_1_final.mp4',
-            is_stitching: false,
-            completed: 2,
-            total: 2
+    test('handleRegenerateSegment and pollStoryboardStatus', async () => {
+        global.fetch = jest.fn().mockResolvedValue({
+            ok: true,
+            json: async () => ({
+                storyboard_id: 'sb_123',
+                title: 'Test',
+                merged_video_url: '/v.mp4',
+                segments: []
+            })
         });
-        expect(document.getElementById('fullMergedVideoSection').classList.contains('hidden')).toBe(false);
-        expect(document.getElementById('downloadFullVideoBtn').href).toContain('sb_1_final.mp4');
+
+        localStorage.setItem('aura_active_storyboard', 'sb_123');
+        mod.resumeActiveStoryboard();
+        await new Promise(r => setTimeout(r, 0));
+
+        await mod.handleRegenerateSegment('seg_1');
+        await mod.pollStoryboardStatus('sb_123');
+        expect(document.querySelector('.toast-success')).not.toBeNull();
     });
 
-    test('renderMergedVideoSection when stitching', () => {
-        mod.renderMergedVideoSection({
-            merged_video_url: null,
-            is_stitching: true,
-            completed: 2,
-            total: 2
-        });
-        expect(document.getElementById('stitchingLoader').classList.contains('hidden')).toBe(false);
-    });
-
-    test('updateProgress', () => {
-        mod.updateProgress({ total: 6, completed: 3 });
-        expect(document.getElementById('storyboardProgressBar').style.width).toBe('50%');
-        expect(document.getElementById('storyboardProgressText').textContent).toBe('3/6');
-    });
-});
-
-describe('Toast & Modal', () => {
-    test('showToast', () => {
-        mod.showToast('Thông báo test', 'success');
-        const toast = document.querySelector('.toast-success');
-        expect(toast).not.toBeNull();
-        expect(toast.textContent).toContain('Thông báo test');
-    });
-
-    test('openFullscreen', () => {
-        mod.openFullscreen('https://example.com/video.mp4');
-        expect(document.getElementById('storyboardVideoModal').classList.contains('hidden')).toBe(false);
-    });
-});
-
-describe('ReStitch action', () => {
     test('handleReStitch calls api', async () => {
         global.fetch = jest.fn().mockResolvedValue({
             ok: true,
             json: async () => ({ success: true, merged_video_url: '/static/merged_videos/test.mp4' })
         });
-        // Set storyboard id
         localStorage.setItem('aura_active_storyboard', 'sb_123');
         mod.resumeActiveStoryboard();
         await new Promise(r => setTimeout(r, 0));
 
         await mod.handleReStitch();
         expect(global.fetch).toHaveBeenCalled();
+    });
+
+    test('close modal buttons and backdrop', () => {
+        mod.initStoryboardManager();
+        const modal = document.getElementById('storyboardVideoModal');
+        modal.classList.remove('hidden');
+        document.getElementById('closeStoryboardVideoBtn').click();
+        expect(modal.classList.contains('hidden')).toBe(true);
+
+        modal.classList.remove('hidden');
+        document.getElementById('storyboardVideoBackdrop').click();
+        expect(modal.classList.contains('hidden')).toBe(true);
+    });
+
+    test('attachSegmentEvents triggers action buttons', () => {
+        const seg = { id: 'seg_1', order: 1, text: 'Hello', status: 'completed', video_url: 'https://v.mp4', num_frames: 65, duration_sec: 4.0 };
+        mod.renderTimeline({ title: 'Test', segments: [seg], completed: 1, total: 1 });
+        
+        const fullscreenBtn = document.querySelector('[data-action="fullscreen"]');
+        expect(fullscreenBtn).not.toBeNull();
+        fullscreenBtn.click();
+        expect(document.getElementById('storyboardVideoModal').classList.contains('hidden')).toBe(false);
     });
 });

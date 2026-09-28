@@ -16,11 +16,19 @@ Các component Jinja2 + JS + CSS cho tính năng Storyboard Video.
 
 ## JavaScript
 
+### storyboard_api.js
+- `createStoryboardApi()`, `fetchStoryboardStatus()`, `fetchStoryboard()`
+- `regenerateSegmentApi()`, `reStitchStoryboardApi()`
+
+### storyboard_ui.js
+- `escapeHtml()`, `showToast()` – 4 loại toast
+- `openFullscreen()`, `updateProgress()`
+- `renderSegmentCard()`, `renderMergedVideoSection()`, `renderTimeline()`
+
 ### storyboard_manager.js
-- `initStoryboardManager()`, `handleAudioUpload()`, `handleCreateStoryboard()`
-- `renderTimeline()`, `renderSegmentCard()`, `updateProgress()`
-- `pollStoryboardStatus()` – polling 10s
-- `showToast()` – 4 loại toast
+- `initStoryboardManager()`, `handleAudioUpload()`, `handleSrtUpload()`
+- `handleCreateStoryboard()`, `handleRegenerateSegment()`, `handleReStitch()`
+- `startPolling()`, `pollStoryboardStatus()` – polling 8s
 - `resumeActiveStoryboard()` – localStorage
 
 ### storyboard_history.js

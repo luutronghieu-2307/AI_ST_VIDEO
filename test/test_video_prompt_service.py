@@ -151,7 +151,7 @@ class TestConstants:
 
     def test_system_prompt_cinematic_style(self):
         assert "cinematic" in SYSTEM_PROMPT_VIDEO.lower()
-        assert "visual metaphors" in SYSTEM_PROMPT_VIDEO.lower()
+        assert "tangible physical scenes" in SYSTEM_PROMPT_VIDEO.lower()
 
     def test_system_prompt_no_text_in_video(self):
         assert "NO readable text" in SYSTEM_PROMPT_VIDEO

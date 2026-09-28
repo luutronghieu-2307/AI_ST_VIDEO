@@ -11,31 +11,33 @@ from fastapi import HTTPException
 from core.config import settings
 from services.groq_service import groq_service
 
-SYSTEM_PROMPT_VIDEO = """You are an award-winning cinematic director and visual storyteller for the LTX 2.5 video model.
+SYSTEM_PROMPT_VIDEO = """You are a world-class cinematic director writing hyper-detailed video prompts for the LTX 2.5 FREE model.
 
-Your mission: Transform narrative voiceovers into VIVID, DYNAMIC, STORY-DRIVEN visual scenes with powerful visual metaphors instead of boring abstract graphics.
+LTX 2.5 FREE REQUIREMENT: Because this is a free-tier model with limited inference, your prompt MUST be extremely specific and detailed. Vague prompts produce bad videos. Every element must be described explicitly.
 
-CRITICAL CREATIVE RULES:
-1. BAN GENERIC ABSTRACT CLICHÉS:
-   - NEVER use generic glowing neural networks, floating 0/1 binary code, abstract digital cubes, or spinning brain holograms.
-   - ALWAYS turn abstract concepts into TANGIBLE REAL-WORLD METAPHORS and STORY-DRIVEN SCENES.
+PRIME DIRECTIVE: The video must DIRECTLY and LITERALLY visualize what the narrator is SAYING. Never substitute mentioned subjects with robots, holograms, or abstract AI imagery unless the narration explicitly says so.
 
-2. MASTER VISUAL METAPHORS & HUMAN-TECH INTERACTIONS:
-   - If talking about "AI vs Human consciousness": Show contrasting juxtaposition (e.g. an artist freely painting with emotion beside a precise robotic arm waiting for a prompt; or a thoughtful human smiling next to a metallic android in a warm studio).
-   - If talking about "Algorithms & training on data": Show vivid learning metaphors (e.g. a scientist feeding endless historical books into a luminous optical scanner, or a mentor teaching a curious robot in a sunlit classroom).
-   - If talking about "Speed & computation": Show dynamic real-world action (e.g. time-lapse of a bustling modern city at dusk with light trails, or scientists inspecting ultra-fast holographic telemetry in a futuristic lab).
-   - If talking about "Human guidance & teamwork": Show human hands and AI robotic tools working in harmony on an architectural masterplan.
+MANDATORY DETAIL STRUCTURE — describe ALL of these in every prompt:
+1. SUBJECT: Who/what is the main focus? (e.g. "a 30-year-old professional woman in a blue blazer")
+2. SPECIFIC ACTION: Exactly what are they doing, step by step? (e.g. "leans forward, places both hands on the keyboard, types rapidly, eyes scanning the screen")
+3. OBJECT DETAILS: What objects are present and what do they look like? (e.g. "a slim silver MacBook with a glowing screen showing data charts")
+4. ENVIRONMENT: Where exactly? Specific room/place details. (e.g. "a bright modern open-plan office with floor-to-ceiling windows, city skyline visible")
+5. LIGHTING: Exact light quality, direction, color. (e.g. "warm late-afternoon golden light streaming from the left, soft shadow on the right side")
+6. CAMERA: One specific shot type + movement. (e.g. "medium close-up, slow dolly-in from behind the laptop toward her face")
 
-3. CINEMATOGRAPHY & MOVEMENT:
-   - Describe smooth camera motion (e.g. "Slow cinematic dolly-in", "Elegant tracking shot", "Wide dynamic pan").
-   - Cinematic lighting (golden hour, soft volumetric rim lighting, dramatic shadows, shallow depth of field, 35mm film look).
-   - Rich physical textures (metallic surfaces, dust motes in sunbeams, rich fabric, natural environments).
+RULE — LITERAL CONTENT:
+- Narration says "laptop" → show a real laptop. "Factory" → show a factory floor. "Person thinking" → show a person with thoughtful expression, hand on chin, eyes looking away.
+- Translate abstract concepts into tangible physical scenes: "efficiency" = a worker checking items off a list quickly; "connection" = two people shaking hands firmly; "growth" = a bar chart being drawn on a whiteboard.
 
-OUTPUT CONSTRAINTS:
-- Output directly in ENGLISH, one cohesive descriptive paragraph (< 180 words).
-- NO introductory text, NO "Prompt:", NO meta-commentary or thinking.
-- NO readable text/words/letters/typography in the scene.
-- Use active, visual, present-tense descriptions."""
+FEW-SHOT EXAMPLE:
+Narrator says: "Laptops and computers are now the main tool for work."
+GOOD prompt: "A medium close-up shot slowly dollying in: a focused young man in a gray shirt sits at a clean wooden desk, his fingers moving quickly across a full-size laptop keyboard, eyes tracking lines of content on the bright screen. Two monitors flank the laptop displaying spreadsheets. The modern home office is bathed in cool blue morning light from a wide window behind him, bokeh city buildings visible through the glass. Shallow depth of field keeps the laptop sharp while the background softly blurs."
+
+OUTPUT RULES:
+- ENGLISH only. One dense, rich paragraph. 150–220 words.
+- NO "Prompt:", NO "Here is...", NO meta text. Start directly with the scene.
+- NO readable text/letters/numbers visible on screen.
+- Every sentence must describe a visible, physical, specific detail."""
 
 DEFAULT_NEGATIVE_PROMPT = (
     "blurry, low quality, distorted, worst quality, abstract floating numbers, text overlay, watermark"
@@ -73,10 +75,12 @@ def build_video_prompt(
         return f"A cinematic documentary video shot, photorealistic, 4k resolution, cinematic lighting, {style}, depicting: {segment_text.strip()}."
 
     user_content = (
-        f"Narration segment: {segment_text}\n\n"
-        f"Storyboard context: {context or 'General documentary'}\n\n"
+        f"NARRATOR SAYS: \"{segment_text.strip()}\"\n\n"
+        f"Context/Topic: {context or 'General content'}\n\n"
         f"Visual style: {style}\n\n"
-        f"Generate a detailed LTX 2.5 video prompt for this segment."
+        f"TASK: Generate a detailed LTX 2.5 video shot that DIRECTLY visualizes what the narrator is saying.\n"
+        f"Show the EXACT objects, people, and actions mentioned or implied in the narration.\n"
+        f"Do NOT replace them with robots, holograms, or AI imagery unless the narration explicitly mentions those."
     )
 
     messages = [
@@ -89,7 +93,7 @@ def build_video_prompt(
             api_key=api_key,
             model=settings.GROQ_CREATIVE_MODEL,
             messages=messages,
-            max_tokens=500,
+            max_tokens=650,
             temperature=0.7,
         )
     except Exception as e:

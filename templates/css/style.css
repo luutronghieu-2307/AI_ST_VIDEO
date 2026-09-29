@@ -4,17 +4,20 @@
    ========================================================================== */
 
 /* Base & Design System */
-@import "base/variables.css";
-@import "base/animations.css";
+@import "base/variables.css?v=3.0";
+@import "base/animations.css?v=3.0";
 
 /* Components */
-@import "components/header_nav.css";
-@import "components/control_form.css";
-@import "components/preview_panel.css";
-@import "components/ai_builder.css";
-@import "components/history.css";
-@import "components/modals.css";
-@import "components/toast_banner.css";
+@import "components/header_nav.css?v=3.0";
+@import "components/control_form.css?v=3.0";
+@import "components/presets_buttons.css?v=3.0";
+@import "components/preview_panel.css?v=3.0";
+@import "components/ai_builder.css?v=3.0";
+@import "components/mode_selector.css?v=3.0";
+@import "components/history.css?v=3.0";
+@import "components/lightbox_modal.css?v=3.0";
+@import "components/manager_modal.css?v=3.0";
+@import "components/toast_banner.css?v=3.0";
 
 /* Responsive */
-@import "components/responsive.css";
+@import "components/responsive.css?v=3.0";

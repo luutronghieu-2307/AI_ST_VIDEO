@@ -3,6 +3,6 @@
    Modularized into sub-modules (< 150 lines per module)
    ========================================================================== */
 
-@import "storyboard/storyboard_input.css";
-@import "storyboard/storyboard_full_video.css";
-@import "storyboard/storyboard_timeline.css";
+@import "storyboard/storyboard_input.css?v=3.0";
+@import "storyboard/storyboard_full_video.css?v=3.0";
+@import "storyboard/storyboard_timeline.css?v=3.0";

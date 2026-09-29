@@ -1,54 +1,4 @@
-/* modals.css – Lightbox Image Modal & Template/History Manager Modals */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-backdrop {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(10px);
-}
-
-.modal-content {
-    position: relative;
-    max-width: 90vw;
-    max-height: 90vh;
-    z-index: 1001;
-}
-
-.modal-content img {
-    max-width: 90vw;
-    max-height: 85vh;
-    border-radius: var(--border-radius-md);
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-}
-
-.close-modal {
-    position: absolute;
-    top: -40px;
-    right: 0;
-    background: rgba(255,255,255,0.1);
-    border: none;
-    color: #fff;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
+/* manager_modal.css – Template and History Manager Modals */
 .template-actions-row {
     display: flex;
     align-items: center;
@@ -56,18 +6,19 @@
 }
 
 .modal-card {
-    max-width: 580px;
+    max-width: 600px;
     width: 92%;
     max-height: 85vh;
     display: flex;
     flex-direction: column;
-    padding: 22px;
-    background: rgba(15, 23, 42, 0.92);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 24px;
+    background: rgba(15, 22, 38, 0.88);
+    backdrop-filter: blur(32px) saturate(190%);
+    -webkit-backdrop-filter: blur(32px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: var(--border-radius-lg);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    animation: modalIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.75);
+    animation: modalIn 0.35s var(--ease-spring);
 }
 
 .modal-header {
@@ -75,7 +26,7 @@
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 16px;
-    padding-bottom: 12px;
+    padding-bottom: 14px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -87,30 +38,32 @@
 
 .modal-title h3 {
     margin: 0;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #f1f5f9;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #f8fafc;
+    letter-spacing: -0.01em;
 }
 
 .modal-subtitle {
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
 }
 
 .accent-icon {
     font-size: 1.4rem;
-    color: var(--secondary);
+    color: var(--secondary-light);
+    filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.5));
 }
 
 .template-manager-toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 12px;
-    background: rgba(255, 255, 255, 0.03);
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.04);
     border-radius: var(--border-radius-sm);
-    margin-bottom: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .custom-checkbox-label {
@@ -130,12 +83,12 @@
     flex-direction: column;
     gap: 8px;
     padding-right: 4px;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
 }
 
 .template-list-container::-webkit-scrollbar { width: 6px; }
 .template-list-container::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 4px;
 }
 
@@ -144,27 +97,28 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding: 10px 12px;
+    padding: 10px 14px;
     background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: var(--border-radius-sm);
-    transition: all var(--transition-fast);
+    transition: var(--transition-fast);
 }
 
 .template-item-row:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(6, 182, 212, 0.3);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(6, 182, 212, 0.35);
+    transform: translateY(-1px);
 }
 
 .template-item-row.selected {
-    background: rgba(6, 182, 212, 0.08);
-    border-color: var(--secondary);
+    background: rgba(6, 182, 212, 0.1);
+    border-color: var(--secondary-light);
 }
 
 .template-item-left {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     flex: 1;
     min-width: 0;
 }
@@ -184,15 +138,16 @@
 }
 
 .template-name {
-    font-size: 0.88rem;
-    color: #f1f5f9;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #f8fafc;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .template-preview-text {
-    font-size: 0.74rem;
+    font-size: 0.76rem;
     color: var(--text-dim);
     margin: 0;
     white-space: nowrap;
@@ -201,14 +156,14 @@
 }
 
 .badge-tag.default {
-    background: rgba(99, 102, 241, 0.2);
-    color: #a5b4fc;
-    border: 1px solid rgba(99, 102, 241, 0.35);
+    background: rgba(99, 102, 241, 0.22);
+    color: #c7d2fe;
+    border: 1px solid rgba(99, 102, 241, 0.4);
 }
 
 .badge-tag.protected {
     background: rgba(148, 163, 184, 0.15);
-    color: #94a3b8;
+    color: #cbd5e1;
     width: 22px;
     height: 22px;
     display: inline-flex;
@@ -222,9 +177,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 12px;
+    padding-top: 14px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    font-size: 0.75rem;
+    font-size: 0.78rem;
 }
 
 .info-note {
@@ -234,12 +189,12 @@
     gap: 6px;
 }
 
-.btn-sm { padding: 6px 14px; font-size: 0.82rem; }
+.btn-sm { padding: 7px 16px; font-size: 0.84rem; }
 
 .empty-hint {
     text-align: center;
-    padding: 24px;
+    padding: 28px;
     color: var(--text-dim);
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     font-style: italic;
 }

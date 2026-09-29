@@ -1,12 +1,13 @@
-/* animations.css – Keyframe animations & motion transitions */
+/* animations.css – Apple-Style Motion, Spring Transitions & Dynamic Sheen */
 @keyframes floatGlow {
-    0% { transform: translateY(0) scale(1); }
-    100% { transform: translateY(40px) scale(1.15); }
+    0% { transform: translateY(0) scale(1) rotate(0deg); }
+    50% { transform: translateY(35px) scale(1.15) rotate(6deg); }
+    100% { transform: translateY(-20px) scale(0.92) rotate(-4deg); }
 }
 
 @keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.4); opacity: 0.6; }
+    0%, 100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 4px var(--success)); }
+    50% { transform: scale(1.35); opacity: 0.7; filter: drop-shadow(0 0 12px var(--success)); }
 }
 
 @keyframes spin {
@@ -16,20 +17,36 @@
 
 @keyframes spin-reverse {
     0% { transform: rotate(360deg); }
-    100% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to   { opacity: 1; transform: translateY(0); }
+@keyframes appleFadeUp {
+    0% { opacity: 0; transform: translateY(24px) scale(0.98); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-@keyframes modalIn {
-    from { opacity: 0; transform: scale(0.95) translateY(10px); }
-    to   { opacity: 1; transform: scale(1) translateY(0); }
+@keyframes modalSpringIn {
+    0% { opacity: 0; transform: scale(0.92) translateY(20px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-@keyframes slideDown {
-    from { transform: translateY(-100%); opacity: 0; }
-    to   { transform: translateY(0);    opacity: 1; }
+@keyframes shimmerSweep {
+    0% { transform: translateX(-150%) skewX(-20deg); }
+    100% { transform: translateX(250%) skewX(-20deg); }
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseGlowRing {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4), 0 16px 36px rgba(0, 0, 0, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(99, 102, 241, 0), 0 20px 48px rgba(99, 102, 241, 0.35); }
+}
+
+@keyframes borderGlowSweep {
+    0%, 100% { border-color: rgba(99, 102, 241, 0.25); }
+    50% { border-color: rgba(6, 182, 212, 0.45); }
 }

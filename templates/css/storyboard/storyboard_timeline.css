@@ -1,34 +1,36 @@
-/* storyboard_timeline.css – Timeline Panel, Segment Grid, Video Player & Badges */
+/* storyboard_timeline.css – Timeline Panel, Segment Grid & Status Badges */
 .storyboard-timeline-panel {
-    padding: 24px;
+    padding: 28px;
 }
 
 .storyboard-progress-wrapper {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin: 16px 0 20px;
+    gap: 14px;
+    margin: 18px 0 24px;
 }
 
 .storyboard-progress-bar {
     flex: 1;
-    height: 8px;
+    height: 9px;
     background: rgba(255, 255, 255, 0.08);
-    border-radius: 4px;
+    border-radius: var(--border-radius-full);
     overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
 }
 
 .storyboard-progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #38bdf8, #818cf8);
-    border-radius: 4px;
-    transition: width 0.4s ease;
+    background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+    border-radius: var(--border-radius-full);
+    transition: width 0.5s var(--ease-spring);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
 }
 
 .storyboard-progress-text {
     font-size: 13px;
-    font-weight: 600;
-    color: #38bdf8;
+    font-weight: 700;
+    color: var(--secondary-light);
     min-width: 50px;
     text-align: right;
 }
@@ -36,68 +38,74 @@
 .storyboard-segment-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 18px;
 }
 
 .storyboard-segment-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(18, 24, 43, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 14px;
-    transition: all 0.2s;
+    border-radius: var(--border-radius-md);
+    padding: 16px;
+    transition: var(--transition-bounce);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 .storyboard-segment-card:hover {
-    border-color: rgba(56, 189, 248, 0.3);
-    transform: translateY(-2px);
+    border-color: rgba(56, 189, 248, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.2);
 }
 
 .segment-card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .segment-order {
     font-size: 14px;
-    font-weight: 700;
-    color: #38bdf8;
+    font-weight: 800;
+    color: var(--secondary-light);
 }
 
 .segment-timecode-badge {
     font-size: 11px;
     font-family: monospace;
-    color: #94a3b8;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 2px 6px;
-    border-radius: 6px;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 2px 8px;
+    border-radius: var(--border-radius-xs);
     display: inline-block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
+/* Apple LED Status Badges */
 .segment-status-badge {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
     padding: 3px 10px;
-    border-radius: 12px;
+    border-radius: var(--border-radius-full);
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.2px;
 }
 
-.status-pending { background: rgba(148, 163, 184, 0.15); color: #94a3b8; }
-.status-processing { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
-.status-completed { background: rgba(74, 222, 128, 0.15); color: #4ade80; }
-.status-failed { background: rgba(248, 113, 113, 0.15); color: #f87171; }
+.status-pending { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; }
+.status-processing { background: rgba(56, 189, 248, 0.18); color: #38bdf8; box-shadow: 0 0 10px rgba(56, 189, 248, 0.3); }
+.status-completed { background: rgba(74, 222, 128, 0.18); color: #4ade80; box-shadow: 0 0 10px rgba(74, 222, 128, 0.3); }
+.status-failed { background: rgba(248, 113, 113, 0.18); color: #f87171; box-shadow: 0 0 10px rgba(248, 113, 113, 0.3); }
 
 .segment-video-wrapper {
     width: 100%;
     aspect-ratio: 16 / 9;
-    background: #000;
-    border-radius: 8px;
+    background: #05070d;
+    border-radius: var(--border-radius-sm);
     overflow: hidden;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.6);
 }
 
 .segment-video {
@@ -114,13 +122,19 @@
     justify-content: center;
     color: #334155;
     font-size: 32px;
+    transition: var(--transition-normal);
+}
+
+.storyboard-segment-card:hover .segment-video-placeholder {
+    color: var(--secondary-light);
+    transform: scale(1.1);
 }
 
 .segment-text {
     font-size: 13px;
     color: #cbd5e1;
-    line-height: 1.5;
-    margin-bottom: 10px;
+    line-height: 1.55;
+    margin-bottom: 12px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -129,10 +143,11 @@
 
 .segment-meta {
     display: flex;
-    gap: 12px;
+    gap: 14px;
     font-size: 11px;
-    color: #64748b;
-    margin-bottom: 10px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+    font-weight: 500;
 }
 
 .segment-actions {
@@ -143,13 +158,14 @@
 .storyboard-empty-state {
     text-align: center;
     padding: 60px 20px;
-    color: #64748b;
+    color: var(--text-dim);
 }
 
 .storyboard-empty-state .placeholder-icon {
-    font-size: 48px;
+    font-size: 52px;
     color: #334155;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
 }
 
 @media (max-width: 1024px) {

@@ -53,3 +53,5 @@ class TestLauncherCore:
             t = start_uvicorn_thread(str(tmp_path))
             assert t == thread_instance
             mock_thread.assert_called_once()
+            target_fn = mock_thread.call_args[1]["target"]
+            assert callable(target_fn)
